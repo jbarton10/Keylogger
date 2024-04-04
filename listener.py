@@ -2,7 +2,9 @@ import socket
 
 #used for listening for the file coming in from the keylogger. 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.connect((socket.gethostname(), 1234))
+host = socket.gethostname()
+port = 1234
+s.connect((host, port))
 
 msg = s.recv(1024)
 

