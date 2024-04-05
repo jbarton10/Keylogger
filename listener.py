@@ -10,7 +10,7 @@ msg = s.recv(1024)
 
 print(msg.decode("utf-8"))
 
-# file_name = client.recv(1024).decode()
-# print(file_name)
-# file_size = client.revc(1024).decode()
+file_name = s.recv(1024).decode()
+print(file_name)
+#file_size = s.revc(1024).decode()
 # print(file_size)
