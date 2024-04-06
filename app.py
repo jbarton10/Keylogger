@@ -17,8 +17,10 @@ def sendMessage():
     #Creating Socket
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     host = socket.gethostname()
+    hostIP = socket.gethostbyname(host)
     port = 1234
-    s.bind((host,port))
+    print(hostIP)
+    s.bind((hostIP,port))
     s.listen(5)
 
     client, addr = s.accept()
@@ -33,14 +35,14 @@ def sendMessage():
     print(f"Connection from {addr} has been established!")
     client.send(bytes("Hello from the server!", "utf-8"))
 
-    s.send(str(data).encode())
+    client.send(str(data).encode())
     #More file size stuff
     #s.send(str(file_size).encode())
 
     #data = file.read()
     #s.sendall(data)
     #s.send(b"<END>")
-    log.close()
+    file.close()
     s.close()
 
 # def job():
